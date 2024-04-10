@@ -1,9 +1,11 @@
 
+using Api.CrossCutting.MappingsDTO;
 using Api.Data.Context;
 using Api.Data.Repository.Generic;
 using Api.Service.AuthorService;
 using API.Domain.Interfaces.Repositorys;
 using API.Domain.Interfaces.Services.Author;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Application
@@ -19,6 +21,14 @@ namespace Api.Application
 
             builder.Services.AddScoped<IAuthorService, AuthorService>();
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new DtoProfileToEntity());
+            });
+
+            IMapper mapper = config.CreateMapper();
+            builder.Services.AddSingleton(mapper);
 
 
             builder.Services.AddControllers();

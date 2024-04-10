@@ -1,4 +1,5 @@
-﻿using API.Domain.Entities;
+﻿using API.Domain.Dtos.Author;
+using API.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace API.Domain.Interfaces.Services.Author
 {
     public interface IAuthorService
     {
-        Task<AuthorEntity> AddAuthor(AuthorEntity entity);
+        Task<AuthorEntity> AddAuthor(AuthorDtoCreate entity);
         Task<AuthorEntity> GetByIdAuthor(Guid id);
         Task<IEnumerable<AuthorEntity>> GetAllAuthors();
         Task<AuthorEntity> UpdateAuthor(AuthorEntity entity);

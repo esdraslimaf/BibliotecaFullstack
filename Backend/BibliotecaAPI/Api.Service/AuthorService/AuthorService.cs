@@ -1,6 +1,8 @@
-﻿using API.Domain.Entities;
+﻿using API.Domain.Dtos.Author;
+using API.Domain.Entities;
 using API.Domain.Interfaces.Repositorys;
 using API.Domain.Interfaces.Services.Author;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,22 +15,19 @@ namespace Api.Service.AuthorService
     public class AuthorService:IAuthorService
     {
         private readonly IBaseRepository<AuthorEntity> _repo;
-        public AuthorService(IBaseRepository<AuthorEntity> repo)
+        private readonly IMapper _mapper;
+        public AuthorService(IBaseRepository<AuthorEntity> repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
-        public async Task<AuthorEntity> AddAuthor(AuthorEntity entity)
+        public async Task<AuthorEntity> AddAuthor(AuthorDtoCreate entity)
         {
-            try
-            {
-                return await _repo.Add(entity);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            var authorEntity = _mapper.Map<AuthorEntity>(entity);
+                return await _repo.Add(authorEntity);
+            
+          
         }
 
         public async Task<bool> DeleteAuthor(Guid id)

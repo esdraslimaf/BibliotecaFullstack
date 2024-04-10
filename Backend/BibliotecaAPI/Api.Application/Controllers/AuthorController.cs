@@ -1,4 +1,5 @@
-﻿using API.Domain.Entities;
+﻿using API.Domain.Dtos.Author;
+using API.Domain.Entities;
 using API.Domain.Interfaces.Services.Author;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,9 +16,21 @@ namespace Api.Application.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAuthor([FromBody]AuthorEntity author)
+        public async Task<IActionResult> AddAuthor([FromBody]AuthorDtoCreate authorDtoCreate)
         {
-            return Ok(await _authorService.AddAuthor(author));          
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                return Ok(await _authorService.AddAuthor(authorDtoCreate));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+                    
         }
 
         [HttpGet]
@@ -26,7 +39,7 @@ namespace Api.Application.Controllers
             return Ok(await _authorService.GetAllAuthors());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("BuscarPorId/{id}")]
         public async Task<IActionResult> GetAuthorById(Guid id)
         {
            
@@ -38,7 +51,7 @@ namespace Api.Application.Controllers
                 return Ok(author);          
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Atualizar")]
         public async Task<IActionResult> UpdateAuthor([FromBody] AuthorEntity updatedAuthor)
         {
             var author = await _authorService.GetByIdAuthor(updatedAuthor.Id);
