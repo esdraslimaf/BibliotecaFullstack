@@ -37,6 +37,12 @@ namespace Api.Application
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+            var urlClientCors = "http://localhost:4200";
+
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader().WithOrigins(urlClientCors));
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
