@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,10 @@ export class authorService{
   BuscarAutores()
   {
     return this.httpClient.get<any>(`${this.SERVER_URL}`);
+  }
+
+  CadastrarAutor(obj: any){
+    return this.httpClient.post<any>(`${this.SERVER_URL}`, obj);
   }
 
 }
