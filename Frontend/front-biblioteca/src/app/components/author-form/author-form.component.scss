@@ -1,0 +1,53 @@
+/* Estilos para o formulário */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilos para o cabeçalho do formulário */
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para os campos do formulário */
+  div {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input {
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Garante que a largura inclua o padding e a borda */
+  }
+  
+  /* Estilos para os botões */
+  button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit {
+    background-color: #007bff; /* Cor de fundo para o botão "Confirmar" */
+    color: #fff;
+  }
+  
+  .cancel {
+    background-color: #dc3545; /* Cor de fundo para o botão "Voltar" */
+    color: #fff;
+  }

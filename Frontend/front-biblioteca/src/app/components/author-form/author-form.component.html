@@ -1,10 +1,22 @@
-<h1>Cadastrar novo autor</h1>
+<h1>{{BtnTitulo}} autor</h1>
 
-<form action="">
-<label for="camponome">Nome:</label>
-<input id="camponome" type="text" formControlName="nome" placeholder="Insira o nome">
-<label for="campoemail">Email:</label>
-<input id="campoemail" type="text" formControlName="email" placeholder="Insira o email">
-<label for="camposenha">Senhha:</label>
-<input id="camposenha" type="text" formControlName="senha" placeholder="Insira a senha">
+<form action="" [formGroup]="meuFormulario" (ngSubmit)="Imprimir()">
+    <div>
+        <label for="camponome">Nome:</label>
+        <input id="camponome" type="text" formControlName="name" placeholder="Insira o nome" required>
+    </div>
+    <div>
+        <label for="campoemail">Email:</label>
+        <input id="campoemail" type="text" formControlName="email" placeholder="Insira o email" required>
+    </div>
+
+    <div>
+        <label for="camposenha">Senha:</label>
+        <input id="camposenha" type="text" formControlName="password" placeholder="Insira a senha" required>
+    </div>
+
+    <div>
+        <button class="submit" type="submit" [disabled]="!meuFormulario.valid">{{BtnAcao}}</button>
+        <button class="cancel" type="button" routerLink="/home">Voltar</button>
+    </div>
 </form>

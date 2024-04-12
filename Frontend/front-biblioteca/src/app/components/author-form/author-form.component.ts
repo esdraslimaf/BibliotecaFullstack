@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, output} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { authorService } from '../../services/author.service';
+import { Author } from '../../models/author';
 
 @Component({
   selector: 'app-author-form',
@@ -7,9 +9,26 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrl: './author-form.component.scss'
 })
 export class AuthorFormComponent {
+
+  @Output() ExportarFormulario = new EventEmitter<Author>();
+  @Input() BtnAcao!: string;
+  @Input() BtnTitulo!: string;
+
   meuFormulario!: FormGroup;
 
 
+  constructor(private authorService:authorService) { }
 
-  constructor(private fb: FormBuilder) { }
+  ngOnInit(): void{
+    this.meuFormulario = new FormGroup({
+      name: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      email:new FormControl('', Validators.required)
+    });
+  }
+
+  Imprimir(){
+    this.ExportarFormulario.emit(this.meuFormulario.value);
+}
+
 }
